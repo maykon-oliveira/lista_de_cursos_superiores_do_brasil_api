@@ -11,4 +11,4 @@ scrapper = Scrapper()
 result = scrapper.parse(html)
 
 with open('output.json', 'w') as outfile:
-    json.dump(result, outfile)
+    json.dump(result, outfile, ensure_ascii=False)
