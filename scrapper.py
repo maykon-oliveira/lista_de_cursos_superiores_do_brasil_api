@@ -6,9 +6,13 @@ class Scrapper():
         soup = BeautifulSoup(html, 'html.parser')
 
         content_text = soup.find('div', class_='mw-parser-output')
-        courses = []
+        coursesName = set()
 
-        for i, li_tag in enumerate(content_text.select('ol > li > a')):
-            courses.append({'id': i, 'name': li_tag.get_text()})
+        for li_tag in content_text.select('ol > li > a'):
+            name = li_tag.get_text().strip()
+            if len(name) < 4 or name.startswith('de '):
+                continue
+            coursesName.add(name)
 
+        courses = [{'id': i, 'name': course} for i, course in enumerate(sorted(coursesName))]
         return courses
