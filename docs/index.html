@@ -3,13 +3,267 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Started</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Scraping - Cursos Superiores do Brasil</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    <!--Replace with your tailwind.css once created-->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato');
+
+        html {
+            font-family: 'Lato', sans-serif;
+        }
+    </style>
 </head>
 
-<body>
-    Started
+<body class="bg-gray-100 tracking-wider tracking-normal">
+    <nav id="header" class="fixed w-full z-10 top-0 bg-white border-b border-gray-400">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
+            <div class="pl-4 flex items-center">
+                <svg class="h-5 pr-3 fill-current text-purple-500" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20">
+                    <path
+                        d="M0 2C0 .9.9 0 2 0h16a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm14 12h4V2H2v12h4c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2zM5 9l2-2 2 2 4-4 2 2-6 6-4-4z" />
+                </svg>
+                <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl" href="#">
+                    Web Scraping <span class="hidden md:inline-block"> - Cursos Superiores do Brasil</span>
+                </a>
+            </div>
+            <div class="block lg:hidden pr-4">
+                <button id="nav-toggle"
+                    class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-purple-500 appearance-none focus:outline-none">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="w-full flex-grow lg:flex  lg:content-center lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 z-20"
+                id="nav-content">
+                <div class="flex-1 w-full mx-auto max-w-sm content-center py-4 lg:py-0">
+
+                </div>
+                <ul class="list-reset lg:flex justify-end items-center">
+                    <li class="mr-3 py-2 lg:py-0">
+                        <a class="inline-block py-2 px-4 text-gray-900 no-underline"
+                            href="https://github.com/maykon-oliveira/lista_de_cursos_superiores_do_brasil_api">Github</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--Container-->
+    <div class="container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16">
+        <div class="w-full lg:w-1/5 lg:px-6 text-xl text-gray-800 leading-normal">
+            <p class="text-base font-bold py-2 lg:pb-6 text-gray-700">Menu</p>
+            <div class="block lg:hidden sticky inset-0">
+                <button id="menu-toggle"
+                    class="flex w-full justify-end px-3 py-3 bg-white lg:bg-transparent border rounded border-gray-600 hover:border-purple-500 appearance-none focus:outline-none">
+                    <svg class="fill-current h-3 float-right" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="w-full sticky inset-0 hidden h-64 lg:h-auto overflow-x-hidden overflow-y-auto lg:overflow-y-hidden lg:block mt-0 border border-gray-400 lg:border-transparent bg-white shadow lg:shadow-none lg:bg-transparent z-20"
+                style="top:5em;" id="menu-content">
+                <ul class="list-reset">
+                    <li class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent">
+                        <a href="#inicio"
+                            class="block pl-4 align-middle text-gray-700 no-underline hover:text-purple-500 border-l-4 border-transparent lg:border-purple-500 lg:hover:border-purple-500">
+                            <span class="pb-1 md:pb-0 text-sm text-gray-900 font-bold">Início</span>
+                        </a>
+                    </li>
+                    <li class="py-2 md:my-0 hover:bg-purple-100 lg:hover:bg-transparent">
+                        <a href="#course-table"
+                            class="block pl-4 align-middle text-gray-700 no-underline hover:text-purple-500 border-l-4 border-transparent lg:hover:border-gray-400">
+                            <span class="pb-1 md:pb-0 text-sm">Tabela de Cursos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="w-full lg:w-4/5 p-8 mt-6 lg:mt-0 text-gray-900 leading-normal bg-white border border-gray-400 border-rounded">
+            <!--Title-->
+            <div class="font-sans">
+                <h1 id="inicio" class="font-sans break-normal text-gray-900 pt-6 pb-2 text-xl">Início</h1>
+                <hr class="border-b border-gray-400">
+            </div>
+            <!--Post Content-->
+            <!--Lead Para-->
+            <p class="py-6">
+                👋 Essa página nada mais é do que uma explicação/demonstração/tutorial/how-to das coisas que eu fiz para
+                ter uma lista de todos os cursos do Brasil de acordo com a fonte mais confiável do mundo, o <a
+                    class="text-purple-500 no-underline hover:underline"
+                    href="https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal">Wikipédia</a>, e como
+                "fiz" essa página, bem como a tabela pesquisável de cursos e o botão para download do JSON.
+            </p>
+
+            <p class="py-6">Já adianto que quase nada é de minha autoria, fui juntando o que precisava pra fazer e aqui
+                esta o resultado.</p>
+
+
+            <blockquote class="border-l-4 border-purple-500 italic mb-8 mt-5 pl-8 md:pl-12">Nada se cria, tudo se copia.
+            </blockquote>
+
+            <h1 class="py-2 font-sans">E essa linda página clean?</h1>
+
+            <p class="py-6">Essa página é um template massa que achei bom usar, é gratis, ta
+                aqui o <a class="text-purple-500 no-underline hover:underline"
+                    href="https://www.tailwindtoolbox.com/templates/help-article">link</a>, o CSS do template é o <a
+                    class="text-purple-500 no-underline hover:underline" href="https://tailwindcss.com/">Tailwind</a>.
+                Eu so fui editando, escrevendo e adaptando com as coisas que queria e depois fiz o deploy usando o <a
+                    class="text-purple-500 no-underline hover:underline" href="https://pages.github.com/">Github
+                    Pages</a>.
+            </p>
+            <h1 class="py-2 font-sans">Como gerou o JSON com os cursos?</h1>
+
+            <p class="py-6">
+                Usei a técnica de Web Scraping pra "raspar" os dados da <a
+                    class="text-purple-500 no-underline hover:underline"
+                    href="https://pt.wikipedia.org/wiki/Lista_de_cursos_superiores_do_Brasil">página do Wikipédia que
+                    tem uma listagem dos cursos do Brasil</a>. O link para o "scrapper" esta <a
+                    class="text-purple-500 no-underline hover:underline"
+                    href="https://github.com/maykon-oliveira/lista_de_cursos_superiores_do_brasil_api/blob/main/scrapper.py">aqui</a>
+                (<a href="https://pt.wikipedia.org/wiki/Coleta_de_dados_web">COLETA DE DADOS WEB;</a> <a
+                    href="https://blog.geekhunter.com.br/como-fazer-um-web-scraping-python/">COMO FAZER WEB SCRAPING
+                    PYTHON DE MANEIRA FÁCIL E RÁPIDA</a>).
+            </p>
+            <!--/ Post Content-->
+            <!-- Useful -->
+            <div class="font-sans">
+                <h1 id="course-table" class="font-sans break-normal text-gray-900 pt-6 pb-2 text-xl">Tabela de cursos
+                </h1>
+                <hr class="border-b border-gray-400">
+            </div>
+            <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                <thead>
+                    <tr>
+                        <th data-priority="1">Name</th>
+                        <th data-priority="2">Position</th>
+                        <th data-priority="3">Office</th>
+                        <th data-priority="4">Age</th>
+                        <th data-priority="5">Start date</th>
+                        <th data-priority="6">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                    </tr>
+
+                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
+
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                        <td>New York</td>
+                        <td>27</td>
+                        <td>2011/01/25</td>
+                        <td>$112,000</td>
+                    </tr>
+                </tbody>
+
+            </table>
+            <!-- /Useful -->
+        </div>
+        <!--Back link -->
+        <div class="w-full lg:w-4/5 lg:ml-auto text-base md:text-sm text-gray-500 px-4 py-6">
+            <span class="text-base text-purple-500 font-bold">&lt;</span> <a href="#"
+                class="text-base md:text-sm text-purple-500 font-bold no-underline hover:underline">Back to Help</a>
+        </div>
+    </div>
+    <!--/container-->
+    <footer class="bg-white border-t border-gray-400 shadow">
+        <div class="container mx-auto flex py-8">
+            <div class="w-full mx-auto flex flex-wrap">
+                <div class="flex w-full lg:w-1/2 ">
+                    <div class="px-8">
+                        <h3 class="font-bold text-gray-900">About</h3>
+                        <p class="py-4 text-gray-600 text-sm">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus
+                            commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right">
+                    <div class="px-8">
+                        <h3 class="font-bold text-gray-900">Social</h3>
+                        <ul class="list-reset items-center text-sm pt-3">
+                            <li>
+                                <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-1"
+                                    href="#">Add social links</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        /*Toggle dropdown list*/
+        /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
+
+        var navMenuDiv = document.getElementById("nav-content");
+        var navMenu = document.getElementById("nav-toggle");
+
+        var helpMenuDiv = document.getElementById("menu-content");
+        var helpMenu = document.getElementById("menu-toggle");
+
+        document.onclick = check;
+
+        function check(e) {
+            var target = (e && e.target) || (event && event.srcElement);
+
+
+            //Nav Menu
+            if (!checkParent(target, navMenuDiv)) {
+                // click NOT on the menu
+                if (checkParent(target, navMenu)) {
+                    // click on the link
+                    if (navMenuDiv.classList.contains("hidden")) {
+                        navMenuDiv.classList.remove("hidden");
+                    } else { navMenuDiv.classList.add("hidden"); }
+                } else {
+                    // click both outside link and outside menu, hide menu
+                    navMenuDiv.classList.add("hidden");
+                }
+            }
+
+            //Help Menu
+            if (!checkParent(target, helpMenuDiv)) {
+                // click NOT on the menu
+                if (checkParent(target, helpMenu)) {
+                    // click on the link
+                    if (helpMenuDiv.classList.contains("hidden")) {
+                        helpMenuDiv.classList.remove("hidden");
+                    } else { helpMenuDiv.classList.add("hidden"); }
+                } else {
+                    // click both outside link and outside menu, hide menu
+                    helpMenuDiv.classList.add("hidden");
+                }
+            }
+
+        }
+
+        function checkParent(t, elm) {
+            while (t.parentNode) {
+                if (t == elm) { return true; }
+                t = t.parentNode;
+            }
+            return false;
+        }
+
+
+    </script>
 </body>
 
 </html>
