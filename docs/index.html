@@ -8,10 +8,11 @@
     <title>Web Scraping - Cursos Superiores do Brasil</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
+    <link href="css/loader.css" rel="stylesheet">
     <link href="css/tailwind.min.css" rel="stylesheet">
     <!--Replace with your tailwind.css once created-->
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Lato');
+        @import url('./css/font/Lato-Regular.ttf');
 
         html {
             font-family: 'Lato', sans-serif;
@@ -122,7 +123,7 @@
             <h1 class="py-2 font-sans">Como gerou o JSON com os cursos?</h1>
 
             <p class="py-6">
-                Usei a técnica de Web Scraping pra "raspar" os dados da <a
+                Usei a técnica de Web Scraping para "raspar" os dados da <a
                     class="text-purple-500 no-underline hover:underline"
                     href="https://pt.wikipedia.org/wiki/Lista_de_cursos_superiores_do_Brasil">página do Wikipédia que
                     tem uma listagem dos cursos do Brasil</a>. O link para o "scrapper" esta <a
@@ -139,46 +140,22 @@
                 </h1>
                 <hr class="border-b border-gray-400">
             </div>
-            <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <table id="table" class="min-w-max w-full table-auto mt-5">
                 <thead>
-                    <tr>
-                        <th data-priority="1">Name</th>
-                        <th data-priority="2">Position</th>
-                        <th data-priority="3">Office</th>
-                        <th data-priority="4">Age</th>
-                        <th data-priority="5">Start date</th>
-                        <th data-priority="6">Salary</th>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">ID</th>
+                        <th class="py-3 px-6 text-left">NOme</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-
-                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
-
-                    <tr>
-                        <td>Donna Snider</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                        <td>27</td>
-                        <td>2011/01/25</td>
-                        <td>$112,000</td>
+                <tbody class="text-gray-600 text-sm font-light">
+                    <tr class="border-b border-gray-200 bg-gray-50 hover:bg-gray-100">
+                        <td colspan="2" class="py-3 px-6 text-left">
+                            <div class="loader"></div>
+                        </td>
                     </tr>
                 </tbody>
-
             </table>
             <!-- /Useful -->
-        </div>
-        <!--Back link -->
-        <div class="w-full lg:w-4/5 lg:ml-auto text-base md:text-sm text-gray-500 px-4 py-6">
-            <span class="text-base text-purple-500 font-bold">&lt;</span> <a href="#"
-                class="text-base md:text-sm text-purple-500 font-bold no-underline hover:underline">Back to Help</a>
         </div>
     </div>
     <!--/container-->
@@ -208,62 +185,8 @@
             </div>
         </div>
     </footer>
-    <script>
-        /*Toggle dropdown list*/
-        /*https://gist.github.com/slavapas/593e8e50cf4cc16ac972afcbad4f70c8*/
-
-        var navMenuDiv = document.getElementById("nav-content");
-        var navMenu = document.getElementById("nav-toggle");
-
-        var helpMenuDiv = document.getElementById("menu-content");
-        var helpMenu = document.getElementById("menu-toggle");
-
-        document.onclick = check;
-
-        function check(e) {
-            var target = (e && e.target) || (event && event.srcElement);
-
-
-            //Nav Menu
-            if (!checkParent(target, navMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, navMenu)) {
-                    // click on the link
-                    if (navMenuDiv.classList.contains("hidden")) {
-                        navMenuDiv.classList.remove("hidden");
-                    } else { navMenuDiv.classList.add("hidden"); }
-                } else {
-                    // click both outside link and outside menu, hide menu
-                    navMenuDiv.classList.add("hidden");
-                }
-            }
-
-            //Help Menu
-            if (!checkParent(target, helpMenuDiv)) {
-                // click NOT on the menu
-                if (checkParent(target, helpMenu)) {
-                    // click on the link
-                    if (helpMenuDiv.classList.contains("hidden")) {
-                        helpMenuDiv.classList.remove("hidden");
-                    } else { helpMenuDiv.classList.add("hidden"); }
-                } else {
-                    // click both outside link and outside menu, hide menu
-                    helpMenuDiv.classList.add("hidden");
-                }
-            }
-
-        }
-
-        function checkParent(t, elm) {
-            while (t.parentNode) {
-                if (t == elm) { return true; }
-                t = t.parentNode;
-            }
-            return false;
-        }
-
-
-    </script>
+    <script src="./js/navmenu.js"></script>
+    <script src="./js/table.js"></script>
 </body>
 
 </html>
